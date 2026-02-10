@@ -16,10 +16,6 @@ A simple and secure **Todo List** web application built with React, Node.js, Exp
 
 ---
 
-## Screenshots
-
-> Replace the image paths with your actual image locations in the repo.
-
 ### Sign Up Screen
 
 ![Sign Up Screenshot](signUp.png)
