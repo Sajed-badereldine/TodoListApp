@@ -26,7 +26,7 @@ A simple and secure **Todo List** web application built with React, Node.js, Exp
 
 ### Todo List (Logged In)
 
-![Todo List Screenshot](login.png)
+![Todo List Screenshot](todo.png)
 
 ---
 
