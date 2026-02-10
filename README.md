@@ -22,11 +22,11 @@ A simple and secure **Todo List** web application built with React, Node.js, Exp
 
 ### Sign Up Screen
 
-![Sign Up Screenshot](path/to/signup-screenshot.png)
+![Sign Up Screenshot](signUp.png)
 
 ### Todo List (Logged In)
 
-![Todo List Screenshot](path/to/todo-screenshot.png)
+![Todo List Screenshot](login.png)
 
 ---
 
