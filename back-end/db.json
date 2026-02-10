@@ -53,13 +53,6 @@
       "createdAt": "2026-02-10T12:46:41.107Z"
     },
     {
-      "id": "153dd90d-1852-46c1-86b6-a9fda294951b",
-      "userId": "512e89b2-6da5-45f9-9a7c-9724151a48de",
-      "text": "hello",
-      "completed": false,
-      "createdAt": "2026-02-10T13:32:55.732Z"
-    },
-    {
       "id": "40cc9e91-4fc0-4652-91a5-9bd4711b4a91",
       "userId": "a171c630-9d41-4ae4-a750-7380d15e2214",
       "text": "test",
