@@ -27,7 +27,7 @@
             console.error('Server error:', err);
         }
         });
-    }, [token, navigate, setToken]);
+    }, [token, navigate]);
 
     const addTodo = async (e) => {
         e.preventDefault();
@@ -71,6 +71,31 @@
         setToken(null);
         navigate('/log-in');
     };
+
+    function moveTaskUp(index) {
+        if (index > 0) {
+        const updatedTasks = [...todos];
+        [updatedTasks[index], updatedTasks[index - 1]] = [
+            updatedTasks[index - 1],
+            updatedTasks[index],
+        ];
+        setTodos(updatedTasks);
+        }
+    }
+
+    function moveTaskDown(index) {
+        if (index < todos.length - 1) {
+        const updatedTasks = [...todos];
+        [updatedTasks[index], updatedTasks[index + 1]] = [
+            updatedTasks[index + 1],
+            updatedTasks[index],
+        ];
+        setTodos(updatedTasks);
+        }
+    
+    }
+
+
 
     return (
         <div style={{
@@ -129,35 +154,59 @@
 
         {todos.length === 0 && <p style={{ color: '#666' }}>No tasks yet.</p>}
 
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {todos.map(todo => (
-            <li key={todo.id} style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: 10,
-                marginBottom: 8,
-                background: '#fff',
-                borderRadius: 5,
-                boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
-            }}>
-                <span>{todo.text}</span>
-                <button
-                onClick={() => deleteTodo(todo.id)}
-                style={{
-                    background: '#ff4d4f',
-                    color: '#fff',
-                    border: 'none',
-                    padding: '4px 8px',
-                    borderRadius: 5,
-                    cursor: 'pointer'
-                }}
-                >
-                Delete
-                </button>
-            </li>
-            ))}
-        </ul>
+    <ul style={{ listStyle: 'none', padding: 0 }}>
+    {todos.map((todo, index) => (
+        <li
+        key={todo.id}
+        style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: 10,
+            marginBottom: 8,
+            background: '#fff',
+            borderRadius: 5,
+            boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        }}
+        >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <button
+            onClick={() => moveTaskUp(index)}
+            disabled={index === 0}
+            style={{ cursor: 'pointer' }}
+            >
+            ⬆
+            </button>
+
+            <button
+            
+            onClick={() => moveTaskDown(index)}
+            disabled={index === todos.length - 1}
+            style={{ cursor: 'pointer' }}
+            >
+            ⬇
+            </button>
+
+            <span>{todo.text}</span>
+        </div>
+
+        <button
+            type='buttom'
+            onClick={() => deleteTodo(todo.id)}
+            style={{
+            background: '#ff4d4f',
+            color: '#fff',
+            border: 'none',
+            padding: '4px 8px',
+            borderRadius: 5,
+            cursor: 'pointer'
+            }}
+        >
+            Delete
+        </button>
+        </li>
+    ))}
+    </ul>
         </div>
     );
     }

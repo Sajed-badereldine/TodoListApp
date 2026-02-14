@@ -4,6 +4,7 @@
     const { v4: uuidv4 } = require('uuid');
     const { db, saveDb } = require('./db');
     const authenticateToken = require('./auth');
+    const sendEmail = require('./mailer')
 
     const app = express();
     app.use(express.json());
@@ -18,15 +19,30 @@
 
     const passwordHash = await bcrypt.hash(password, 10);
     const id = uuidv4();
+    const verificationToken = uuidv4() ; 
 
     db.users.push({
         id,
         email,
         passwordHash,
         isVerified: false,
+        verificationToken , 
     });
 
     saveDb();
+
+    try {
+        await sendEmail({
+            from : "onboarding@resend.dev" ,
+            to : email , 
+            subject: 'Please verify your email',
+            text: `Thanks for signing up! To verify your email,
+            please click here: http://localhost:5173/verify-email/${verificationToken}`,
+        })
+    } catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
 
     jwt.sign(
         { id, email, isVerified: false },
@@ -48,6 +64,13 @@
 
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) return res.sendStatus(401);
+
+    if (!user.isVerified) {
+        return res.status(403).json({
+        message: "Please verify your email first."
+    });
+    }
+
 
     jwt.sign(
         { id: user.id, email: user.email, isVerified: user.isVerified },
@@ -101,4 +124,48 @@
     res.sendStatus(204);
     });
 
-    app.listen(3000, () => console.log('Server running on 3000'));
+
+    // verify email 
+
+        app.put('/api/verify-email', async (req, res) => {
+    try {
+        const { verificationToken } = req.body;
+
+        const user = db.users.find(
+        user => user.verificationToken === verificationToken
+        );
+
+        if (!user) {
+        return res.status(401).json({
+            message: 'The email verification code is incorrect'
+        });
+        }
+
+        user.isVerified = true;
+        saveDb();
+
+        const { id, email, isVerified } = user;
+
+        jwt.sign(
+        { id, email, isVerified },
+        process.env.JWT_SECRET,
+        { expiresIn: '2d' },
+        (err, token) => {
+            if (err) return res.status(500).send(err);
+            res.json({ token });
+        }
+        );
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Something went wrong' });
+    }
+    });
+
+
+    app.listen(3000, () => { console.log('Server running on 3000')
+            console.log(process.env.RESEND_API_KEY)
+
+    }
+
+);

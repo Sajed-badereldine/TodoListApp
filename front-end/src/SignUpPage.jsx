@@ -22,7 +22,7 @@ export const SignUpPage = () => {
       const { token } = response.data;
       setToken(token);
 
-    navigate('/todos', { replace: true });
+    navigate('/please-verify', { replace: true });
 
     } catch (err) {
       setErrorMessage(

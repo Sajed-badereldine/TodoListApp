@@ -1,63 +1,6 @@
 {
   "users": [
-    {
-      "id": "50feff2f-0166-42ff-a71a-9c2a4e9c189e",
-      "email": "sajed@gmail.com",
-      "passwordHash": "$2b$10$P1FRRRb.PBcSAjQaZU/bR.T74EUAkMMizEoKB4A8DDlPZ6faztwBe",
-      "isVerified": false
-    },
-    {
-      "id": "b60aba2b-f861-4a29-b178-e684c68670be",
-      "email": "mortada@gmail.com",
-      "passwordHash": "$2b$10$sB2IUj3kLtxrxvdow5yW4eDSDQ.3k5z8ZcW92qXgJHpZOP9kPrJfC",
-      "isVerified": false
-    },
-    {
-      "id": "6bd171a3-9d41-4fd7-bc2c-4da324ba188b",
-      "email": "hasan@gmail.com",
-      "passwordHash": "$2b$10$m94WmnRByy3ScOO5DeypFOsXCAZS7mG76nEDT1fNaBjGe9zXcVD1q",
-      "isVerified": false
-    },
-    {
-      "id": "512e89b2-6da5-45f9-9a7c-9724151a48de",
-      "email": "apk@gmail.com",
-      "passwordHash": "$2b$10$kyzabuvDxL5KvAiuyH1Hi.dcUSGgbNxdF3Q5dzoNhZIVqd8hkVjhC",
-      "isVerified": false
-    },
-    {
-      "id": "30f86e8e-765b-45bc-95bf-6cfded818ba3",
-      "email": "test@gmail.com",
-      "passwordHash": "$2b$10$JUvsh4RKklM9/PJS.BJhU.qxx7D5Y8sDXywfg/izoB1CTMTp4ZUvm",
-      "isVerified": false
-    },
-    {
-      "id": "a171c630-9d41-4ae4-a750-7380d15e2214",
-      "email": "test1@gmail.com",
-      "passwordHash": "$2b$10$Ynb4c95TVjpu3DZMtcZMHu2vusGwL4bIWc6IEnjuCJOWYaSp9F/j6",
-      "isVerified": false
-    }
   ],
   "todos": [
-    {
-      "id": "3eeb54c4-e430-4cd8-8376-5fc6a904033c",
-      "userId": "50feff2f-0166-42ff-a71a-9c2a4e9c189e",
-      "text": "test",
-      "completed": false,
-      "createdAt": "2026-02-10T12:38:03.151Z"
-    },
-    {
-      "id": "234ed214-c6ea-4125-a1ef-cb6038561dbf",
-      "userId": "b60aba2b-f861-4a29-b178-e684c68670be",
-      "text": "hello",
-      "completed": false,
-      "createdAt": "2026-02-10T12:46:41.107Z"
-    },
-    {
-      "id": "40cc9e91-4fc0-4652-91a5-9bd4711b4a91",
-      "userId": "a171c630-9d41-4ae4-a750-7380d15e2214",
-      "text": "test",
-      "completed": false,
-      "createdAt": "2026-02-10T13:35:50.477Z"
-    }
   ]
 }
