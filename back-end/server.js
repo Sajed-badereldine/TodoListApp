@@ -18,7 +18,7 @@
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const id = uuidv4();
+    const id = uuidv4(); 
     const verificationToken = uuidv4() ; 
 
     db.users.push({
@@ -104,7 +104,7 @@
         createdAt: new Date().toISOString(),
     };
 
-    db.todos.push(todo);
+    db.todos.push(todo); 
     saveDb();
 
     res.status(201).json(todo);
@@ -162,6 +162,47 @@
     }
     });
 
+
+    // Password Reset 
+
+    app.put('/api/forgot-password/:email' , async (req , res) => {
+        const {email} = req.params ; 
+        const user = db.users.find(user => user.email === email ) 
+        const passwordResetCode = uuidv4() ; 
+
+        user.passwordResetCode = passwordResetCode ; 
+        saveDb()
+
+    try {
+        await sendEmail({
+            from : "onboarding@resend.dev" ,
+            to : email , 
+            subject: 'Password Reset',
+            text: `To reset your password ,
+            please click here: http://localhost:5173/reset-password/${passwordResetCode}`,
+        })
+        res.sendStatus(200)
+    } catch (e) {
+        console.log(e)
+        return res.sendStatus(500)
+    }
+    })
+
+    app.put('/api/users/:passwordResetCode/reset-password' , async(req , res) => {
+        const {passwordResetCode} = req.params 
+        const {newPassword} = req.body
+
+        const user = db.users.find( user => user.passwordResetCode === passwordResetCode)
+        if(!user) {
+            res.sendStatus(404) ; 
+        }
+        const newPassHash = await bcrypt.hash(newPassword , 10)
+        user.passwordHash = newPassHash
+        delete user.passwordResetCode
+
+        saveDb()
+        res.sendStatus(200)
+    })
 
     app.listen(3000, () => { console.log('Server running on 3000')
             console.log(process.env.RESEND_API_KEY)

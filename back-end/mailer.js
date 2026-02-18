@@ -12,7 +12,7 @@
         });
     } catch (error) {
         console.error("Email error:", error);
-        throw error; // VERY IMPORTANT so your try/catch in signup works
+        throw error; 
     }
     };
 
